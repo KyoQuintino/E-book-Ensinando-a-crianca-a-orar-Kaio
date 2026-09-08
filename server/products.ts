@@ -12,7 +12,7 @@ export type CheckoutUser = {
 } | null;
 
 export function buildCheckoutSessionParams(origin: string, user: CheckoutUser) {
-  const successUrl = `${origin}/?checkout=success`;
+  const successUrl = `${origin}/sucesso?session_id={CHECKOUT_SESSION_ID}`;
   const cancelUrl = `${origin}/?checkout=cancelled`;
   const metadata: Record<string, string> = {
     customer_email: user?.email ?? "",

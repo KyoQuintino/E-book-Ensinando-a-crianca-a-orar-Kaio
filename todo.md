@@ -16,3 +16,10 @@
 - [x] Testar o endpoint Stripe em sandbox, incluindo o webhook de teste.
 - [x] Criar documentação de configuração, fallback e cartão de teste.
 - [x] Salvar novo checkpoint final após corrigir os gaps da integração Stripe.
+
+- [x] Criar rota dedicada `/sucesso` para o retorno do pagamento Stripe.
+- [x] Exibir confirmação da compra e instruções claras para acessar o material.
+- [x] Incluir orientação sobre e-mail, spam, prazo de recebimento e suporte.
+- [x] Atualizar a URL de sucesso do Checkout Stripe para `/sucesso`.
+- [x] Validar a página em desktop, mobile, TypeScript, testes e build.
+- [x] Salvar checkpoint da página de sucesso concluída.

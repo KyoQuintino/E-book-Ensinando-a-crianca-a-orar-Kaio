@@ -16,7 +16,7 @@ O webhook usa a rota `/api/stripe/webhook`, recebe o corpo bruto antes do parser
 
 | Situação | URL | Comportamento |
 | --- | --- | --- |
-| Sucesso | `/?checkout=success` | Exibe uma confirmação no topo da landing page. |
+| Sucesso | `/sucesso?session_id={CHECKOUT_SESSION_ID}` | Abre a página personalizada com confirmação e instruções de acesso. |
 | Cancelamento | `/?checkout=cancelled` | Informa que o checkout foi cancelado e oferece nova tentativa ou Hotmart. |
 | Falha de criação | URL atual | Mostra o erro de fallback e abre a Hotmart. |
 

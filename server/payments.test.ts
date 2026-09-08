@@ -14,7 +14,7 @@ describe("Stripe ebook checkout", () => {
     expect(params.line_items[0]?.price_data.unit_amount).toBe(ebookProduct.unitAmount);
     expect(params.line_items[0]?.quantity).toBe(1);
     expect(params.allow_promotion_codes).toBe(true);
-    expect(params.success_url).toBe("https://example.test/?checkout=success");
+    expect(params.success_url).toBe("https://example.test/sucesso?session_id={CHECKOUT_SESSION_ID}");
     expect(params.cancel_url).toBe("https://example.test/?checkout=cancelled");
     expect(params.client_reference_id).toBe("42");
     expect(params.metadata).toMatchObject({
