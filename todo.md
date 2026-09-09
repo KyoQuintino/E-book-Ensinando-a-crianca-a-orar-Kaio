@@ -24,7 +24,7 @@
 - [x] Validar a página em desktop, mobile, TypeScript, testes e build.
 - [x] Salvar checkpoint da página de sucesso concluída.
 
-- [ ] Verificar o estado Git e confirmar que segredos e artefatos gerados estão ignorados.
-- [ ] Criar repositório GitHub privado com o título solicitado.
-- [ ] Criar commit de publicação e enviar a branch principal para o GitHub.
-- [ ] Verificar o repositório remoto e entregar o link.
+- [x] Verificar o estado Git e confirmar que segredos e artefatos gerados estão ignorados.
+- [x] Criar repositório GitHub privado com o título solicitado.
+- [x] Criar commit de publicação e enviar a branch principal para o GitHub.
+- [x] Verificar o repositório remoto e entregar o link.
