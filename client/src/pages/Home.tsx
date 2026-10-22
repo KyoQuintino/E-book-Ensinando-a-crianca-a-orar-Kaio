@@ -1,6 +1,7 @@
 /* Design direction: faithful preserve/extension of the reference page — devotional editorial mood, asymmetric storytelling, navy surfaces, warm-gold CTAs, serif display headlines, and calm device reveals. */
 import { useEffect, useState } from "react";
 import { trpc } from "@/lib/trpc";
+import { HOTMART_CHECKOUT_URL, PAYMENT_PAGE_PATH } from "@/lib/checkout";
 import {
   ArrowLeft,
   ArrowRight,
@@ -21,8 +22,6 @@ import {
   UsersRound,
   X,
 } from "lucide-react";
-
-const CHECKOUT_URL = "https://pay.hotmart.com/B106306611O";
 
 const ASSETS = {
   logo: "/manus-storage/logo-maos-oracao_18dfb9a7.png",
@@ -80,8 +79,8 @@ function ButtonLink({ children, className = "gold-button" }: { children: React.R
     } catch (error) {
       console.error("[Checkout] Stripe unavailable, using Hotmart fallback", error);
       setCheckoutError(true);
-      const opened = window.open(CHECKOUT_URL, "_blank", "noopener,noreferrer");
-      if (!opened) window.location.assign(CHECKOUT_URL);
+      const opened = window.open(HOTMART_CHECKOUT_URL, "_blank", "noopener,noreferrer");
+      if (!opened) window.location.assign(HOTMART_CHECKOUT_URL);
     } finally {
       setOpening(false);
     }
@@ -93,7 +92,7 @@ function ButtonLink({ children, className = "gold-button" }: { children: React.R
         {opening ? "Abrindo checkout..." : children}
       </button>
       {checkoutError && <span role="status" aria-live="polite" className="max-w-[260px] text-[10px] leading-4 text-[#f3a8a8]">O Stripe não respondeu. Abrimos a Hotmart como alternativa segura.</span>}
-      <a className="text-[10px] font-semibold text-[#9aa8c0] underline decoration-[#f0c86a]/50 underline-offset-4 transition-colors hover:text-[#f0c86a]" href={CHECKOUT_URL} target="_blank" rel="noreferrer">
+      <a className="text-[10px] font-semibold text-[#9aa8c0] underline decoration-[#f0c86a]/50 underline-offset-4 transition-colors hover:text-[#f0c86a]" href={PAYMENT_PAGE_PATH}>
         Ou comprar pela Hotmart
       </a>
     </span>
