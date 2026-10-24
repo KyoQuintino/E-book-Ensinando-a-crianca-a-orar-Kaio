@@ -23,3 +23,8 @@
 - [x] Atualizar a URL de sucesso do Checkout Stripe para `/sucesso`.
 - [x] Validar a página em desktop, mobile, TypeScript, testes e build.
 - [x] Salvar checkpoint da página de sucesso concluída.
+
+- [x] Verificar o estado Git e confirmar que segredos e artefatos gerados estão ignorados.
+- [x] Criar repositório GitHub privado com o título solicitado.
+- [x] Criar commit de publicação e enviar a branch principal para o GitHub.
+- [x] Verificar o repositório remoto e entregar o link.
