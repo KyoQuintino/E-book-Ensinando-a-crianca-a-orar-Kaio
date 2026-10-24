@@ -1,7 +1,6 @@
 /* Design direction: faithful preserve/extension of the reference page — devotional editorial mood, asymmetric storytelling, navy surfaces, warm-gold CTAs, serif display headlines, and calm device reveals. */
-import { useEffect, useState } from "react";
-import { trpc } from "@/lib/trpc";
-import { HOTMART_CHECKOUT_URL, PAYMENT_PAGE_PATH } from "@/lib/checkout";
+import { useState } from "react";
+import { HOTMART_CHECKOUT_URL } from "@/lib/checkout";
 import {
   ArrowLeft,
   ArrowRight,
@@ -65,55 +64,7 @@ function ImageWithFallback({ src, fallback, alt, className }: { src: string; fal
 }
 
 function ButtonLink({ children, className = "gold-button" }: { children: React.ReactNode; className?: string }) {
-  const checkout = trpc.payments.createEbookCheckout.useMutation();
-  const [opening, setOpening] = useState(false);
-  const [checkoutError, setCheckoutError] = useState(false);
-
-  const handleCheckout = async () => {
-    setOpening(true);
-    setCheckoutError(false);
-    try {
-      const result = await checkout.mutateAsync();
-      const opened = window.open(result.url, "_blank", "noopener,noreferrer");
-      if (!opened) window.location.assign(result.url);
-    } catch (error) {
-      console.error("[Checkout] Stripe unavailable, using Hotmart fallback", error);
-      setCheckoutError(true);
-      const opened = window.open(HOTMART_CHECKOUT_URL, "_blank", "noopener,noreferrer");
-      if (!opened) window.location.assign(HOTMART_CHECKOUT_URL);
-    } finally {
-      setOpening(false);
-    }
-  };
-
-  return (
-    <span className="inline-flex flex-col items-start gap-2">
-      <button type="button" className={className} onClick={handleCheckout} disabled={opening}>
-        {opening ? "Abrindo checkout..." : children}
-      </button>
-      {checkoutError && <span role="status" aria-live="polite" className="max-w-[260px] text-[10px] leading-4 text-[#f3a8a8]">O Stripe não respondeu. Abrimos a Hotmart como alternativa segura.</span>}
-      <a className="text-[10px] font-semibold text-[#9aa8c0] underline decoration-[#f0c86a]/50 underline-offset-4 transition-colors hover:text-[#f0c86a]" href={PAYMENT_PAGE_PATH}>
-        Ou comprar pela Hotmart
-      </a>
-    </span>
-  );
-}
-
-function CheckoutStatus() {
-  const [status, setStatus] = useState<"success" | "cancelled" | null>(null);
-
-  useEffect(() => {
-    const value = new URLSearchParams(window.location.search).get("checkout");
-    if (value === "success" || value === "cancelled") setStatus(value);
-  }, []);
-
-  if (!status) return null;
-
-  return (
-    <div className={`border-b px-5 py-3 text-center text-xs font-bold tracking-[0.08em] ${status === "success" ? "border-emerald-300/20 bg-emerald-400/10 text-emerald-100" : "border-[#f0c86a]/20 bg-[#f0c86a]/10 text-[#f7f0df]"}`}>
-      {status === "success" ? "Pagamento iniciado com sucesso. O acesso será enviado após a confirmação." : "Checkout cancelado. Você pode tentar novamente ou comprar pela Hotmart."}
-    </div>
-  );
+  return <a className={className} href={HOTMART_CHECKOUT_URL} target="_blank" rel="noreferrer">{children}</a>;
 }
 
 function Header() {
@@ -233,5 +184,5 @@ function Footer() {
 }
 
 export default function Home() {
-  return <div className="min-h-screen overflow-hidden bg-[#071127]"><Header /><CheckoutStatus /><main><Hero /><PainSection /><SolutionSection /><MockupPreview /><BenefitsSection /><FamilySection /><Testimonials /><OfferSection /><CampaignSection /><FAQ /><FinalCTA /></main><Footer /></div>;
+  return <div className="min-h-screen overflow-hidden bg-[#071127]"><Header /><main><Hero /><PainSection /><SolutionSection /><MockupPreview /><BenefitsSection /><FamilySection /><Testimonials /><OfferSection /><CampaignSection /><FAQ /><FinalCTA /></main><Footer /></div>;
 }
